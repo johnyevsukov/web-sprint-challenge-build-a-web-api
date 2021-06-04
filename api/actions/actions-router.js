@@ -31,9 +31,7 @@ router.post('/', validateProjectId, validateAction, (req, res, next) => {
     .catch(next)
 })
 
-// I needed seperate middleware for the put becasue, again, something is off with the testing.
-// It is expecting completed to be true on the put but not the post.
-router.put('/:id', validateActionId, validateActionForPut, (req, res, next) => {
+router.put('/:id', validateActionId, validateAction, (req, res, next) => {
     Action.update(req.params.id, req.action)
     .then(action => {
         res.status(201).json(action)
